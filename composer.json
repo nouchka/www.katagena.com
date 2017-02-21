@@ -1,8 +1,5 @@
 {
   "require": {
     "ext-mysql": "*"
-  },
-   "require": {
-      "ext-gettext": "*"
-    }
+  }
 }
