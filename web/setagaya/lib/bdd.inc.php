@@ -5,14 +5,22 @@ $user = $url ["user"];
 $pass = $url ["pass"];
 $db = substr ( $url ["path"], 1 );
 
-$link = mysql_connect ( $host, $user, $pass );
-if (! $link) {
-	die ( 'Not connected : ' . mysql_error () );
+$mysqli = new mysqli ( $host, $user, $pass, $db );
+/*
+ * This is the "official" OO way to do it,
+ * BUT $connect_error was broken until PHP 5.2.9 and 5.3.0.
+ */
+if ($mysqli->connect_error) {
+	die ( 'Connect Error (' . $mysqli->connect_errno . ') ' . $mysqli->connect_error );
 }
-$db_selected = mysql_select_db ( $db );
-if (! $db_selected) {
-	die ( 'Can\'t use $db : ' . mysql_error () );
+
+/*
+ * Use this instead of $connect_error if you need to ensure
+ * compatibility with PHP versions prior to 5.2.9 and 5.3.0.
+ */
+if (mysqli_connect_error ()) {
+	die ( 'Connect Error (' . mysqli_connect_errno () . ') ' . mysqli_connect_error () );
 }
-mysql_set_charset ( 'utf8_bin' );
+
 $socketIo = false;
 ?>
