@@ -1,0 +1,4 @@
+RewriteEngine on
+
+RewriteRule "rss\.xml" "https://nouchka.katagena.com/category/ggt/feed/index.html" [R=301,L]
+RewriteRule "" "https://nouchka.katagena.com/category/ggt/index.html" [R=301,L]

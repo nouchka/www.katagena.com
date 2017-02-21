@@ -1,3 +1,4 @@
 RewriteEngine on
 
-RewriteRule "^/dharma/(.+)" "https://nouchka.katagena.com/$1" [R=301,L]
+RewriteRule "(.+)" "https://nouchka.katagena.com/$1" [R=301,L]
+RewriteRule "" "https://nouchka.katagena.com/" [R=301,L]
