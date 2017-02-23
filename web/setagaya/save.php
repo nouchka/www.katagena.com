@@ -18,11 +18,11 @@ if (isset ( $_SESSION ['username'] )) {
 		if (isset ( $_POST ['inputId'] ) && $_POST ['inputId'] > 0) {
 			// Check rights
 			$req = "SELECT * FROM projects pj INNER JOIN users us ON us.user_id = pj.project_owner WHERE pj.project_id = '" . mysqli_escape_string ( $_POST ['inputId'] ) . "' AND user_login = '" . $_SESSION ['username'] . "';";
-			$res = mysqli_query ( $req );
+			$res = $mysqli->query ( $req );
 			if (mysqli_num_rows ( $res ) == 1) {
 				// Update project
 				$req = "UPDATE projects SET project_name = '" . mysqli_escape_string ( $_POST ['inputName'] ) . "' WHERE project_id = '" . mysqli_escape_string ( $_POST ['inputId'] ) . "';";
-				$res = mysqli_query ( $req );
+				$res = $mysqli->query ( $req );
 				mysqli_close ( $link );
 				header ( 'Location:./form.php' );
 			} else {
@@ -35,20 +35,20 @@ if (isset ( $_SESSION ['username'] )) {
 		} else {
 			// Check users
 			$req = "SELECT user_id FROM users WHERE user_login = '" . $_SESSION ['username'] . "';";
-			$res = mysqli_query ( $req );
+			$res = $mysqli->query ( $req );
 			if (mysqli_num_rows ( $res ) > 0) {
 				$line = mysqli_fetch_array ( $res );
 				$id = $line ['user_id'];
 			} else {
 				$req = "INSERT INTO users (`user_id` , `user_login`) VALUES (NULL, '" . mysqli_escape_string ( $_SESSION ['username'] ) . "');";
-				$res = mysqli_query ( $req );
+				$res = $mysqli->query ( $req );
 				$id = mysqli_insert_id ();
 			}
 			$req = "INSERT INTO projects (`project_id`, `project_name`, `project_owner`) VALUES (NULL, '" . mysqli_escape_string ( $_POST ['inputName'] ) . "', '" . $id . "');";
-			$res = mysqli_query ( $req );
+			$res = $mysqli->query ( $req );
 			$idProject = mysqli_insert_id ();
 			$req = "INSERT INTO rights (`right_id` ,`right_user` ,`right_project` ,`right_modify` ,`right_act` ,`right_manuser` ,`right_mantask`) VALUES (NULL ,  '" . $id . "', '" . $idProject . "', '1', '1', '1', '1');";
-			$res = mysqli_query ( $req );
+			$res = $mysqli->query ( $req );
 			mysqli_close ( $link );
 			header ( 'Location:./form.php' );
 		}
@@ -69,7 +69,7 @@ if (isset ( $_SESSION ['username'] )) {
 			$sql = "";
 		}
 		$req = "SELECT * FROM users INNER JOIN rights rg ON rg.right_user = user_id" . $sql . " WHERE right_project = " . $p_id . " AND user_login = '" . $_SESSION ['username'] . "';";
-		$res = mysqli_query ( $req );
+		$res = $mysqli->query ( $req );
 		
 		// Check t_id part off project
 		
@@ -79,7 +79,7 @@ if (isset ( $_SESSION ['username'] )) {
 				if (isset ( $_POST ['t_id'] ) && $_POST ['t_id'] > 0) {
 					// Update task
 					$req = "UPDATE tasks SET task_name = '" . mysqli_escape_string ( $_POST ['inputTask'] ) . "',  task_category = '" . mysqli_escape_string ( $_POST ['inputCategory'] ) . "', task_time = '" . mysqli_escape_string ( $_POST ['inputHours'] ) . "' WHERE task_id = '" . mysqli_escape_string ( $_POST ['t_id'] ) . "';";
-					$res = mysqli_query ( $req );
+					$res = $mysqli->query ( $req );
 					mysqli_close ( $link );
 					if ($socketIo) {
 						try {
@@ -100,7 +100,7 @@ if (isset ( $_SESSION ['username'] )) {
 					header ( 'Location:./form.php?p_id=' . $p_id );
 				} else {
 					$req = "INSERT INTO `tasks` (`task_id` ,`task_name` ,`task_category` ,`task_time` ,`task_deadline` ,`task_lvl` ,`task_project` ,`task_owner` ,`task_order`) VALUES (NULL , '" . mysqli_escape_string ( $_POST ['inputTask'] ) . "', '" . mysqli_escape_string ( $_POST ['inputCategory'] ) . "', '" . mysqli_escape_string ( $_POST ['inputHours'] ) . "', NULL , '0', '" . $p_id . "', NULL, '');";
-					$res = mysqli_query ( $req );
+					$res = $mysqli->query ( $req );
 					$id = mysqli_insert_id ();
 					mysqli_close ( $link );
 					if ($socketIo) {
@@ -125,7 +125,7 @@ if (isset ( $_SESSION ['username'] )) {
 				$id = mysqli_escape_string ( str_replace ( "li-", "", $_GET ['t_id'] ) );
 				// Update task
 				$req = "UPDATE tasks SET task_order = '" . mysqli_escape_string ( $_GET ['order'] ) . "' WHERE task_id = '" . mysqli_escape_string ( $id ) . "';";
-				$res = mysqli_query ( $req );
+				$res = $mysqli->query ( $req );
 				mysqli_close ( $link );
 				if ($socketIo) {
 					try {
@@ -155,7 +155,7 @@ if (isset ( $_SESSION ['username'] )) {
 				$id = mysqli_escape_string ( str_replace ( "li-", "", $_GET ['t_id'] ) );
 				// Update task
 				$req = "UPDATE tasks SET task_done = '1' WHERE task_id = '" . mysqli_escape_string ( $id ) . "';";
-				$res = mysqli_query ( $req );
+				$res = $mysqli->query ( $req );
 				mysqli_close ( $link );
 				if ($socketIo) {
 					try {
@@ -186,14 +186,14 @@ if (isset ( $_SESSION ['username'] )) {
 				$id = mysqli_escape_string ( str_replace ( "li-", "", $_GET ['t_id'] ) );
 				if (substr ( $_GET ['from'], 0, 6 ) == "today-") {
 					$req = "UPDATE tasks SET task_owner = NULL WHERE task_id = " . $id . ";";
-					$res = mysqli_query ( $req );
+					$res = $mysqli->query ( $req );
 				}
 				if (isset ( $lvl [$to] )) {
 					$req = "UPDATE tasks SET task_lvl = " . $lvl [$to] . " WHERE task_id = " . $id . ";";
-					$res = mysqli_query ( $req );
+					$res = $mysqli->query ( $req );
 				} else if (substr ( $_GET ['to'], 0, 6 ) == "today-") {
 					$req = "UPDATE tasks SET task_owner = " . substr ( $_GET ['to'], 6 ) . " WHERE task_id = " . $id . ";";
-					$res = mysqli_query ( $req );
+					$res = $mysqli->query ( $req );
 				}
 				if ($socketIo) {
 					try {
@@ -215,24 +215,24 @@ if (isset ( $_SESSION ['username'] )) {
 				echo "task updated";
 			} else if (isset ( $_GET ['action'] ) && $_GET ['action'] == "remove-user" && isset ( $_GET ['u_id'] ) && $_GET ['u_id'] != "") {
 				$req = "DELETE FROM rights WHERE right_project = " . $p_id . " AND right_user = " . mysqli_escape_string ( $_GET ['u_id'] ) . ";";
-				$res = mysqli_query ( $req );
+				$res = $mysqli->query ( $req );
 				$req = "UPDATE tasks SET task_owner = NULL WHERE task_project = " . $p_id . " AND task_owner = " . mysqli_escape_string ( $_GET ['u_id'] ) . ";";
-				$res = mysqli_query ( $req );
+				$res = $mysqli->query ( $req );
 				mysqli_close ( $link );
 				header ( 'Location:./form.php?p_id=' . $p_id );
 			} else if (isset ( $_GET ['action'] ) && $_GET ['action'] == "add-user" && isset ( $_POST ['u_name'] ) && $_POST ['u_name'] != "") {
 				$req = "SELECT user_id FROM users WHERE user_login = '" . mysqli_escape_string ( $_POST ['u_name'] ) . "';";
-				$res = mysqli_query ( $req );
+				$res = $mysqli->query ( $req );
 				if (mysqli_num_rows ( $res ) > 0) {
 					$line = mysqli_fetch_array ( $res );
 					$id = $line ['user_id'];
 				} else {
 					$req = "INSERT INTO users (`user_id` , `user_login`) VALUES (NULL, '" . mysqli_escape_string ( $_POST ['u_name'] ) . "');";
-					$res = mysqli_query ( $req );
+					$res = $mysqli->query ( $req );
 					$id = mysqli_insert_id ();
 				}
 				$req = "INSERT INTO rights (`right_id` ,`right_user` ,`right_project` ,`right_modify` ,`right_act` ,`right_manuser` ,`right_mantask`) VALUES (NULL ,  '" . $id . "', '" . $p_id . "', '1', '1', '1', '1');";
-				$res = mysqli_query ( $req );
+				$res = $mysqli->query ( $req );
 				mysqli_close ( $link );
 				header ( 'Location:./form.php?p_id=' . $p_id );
 			} else {

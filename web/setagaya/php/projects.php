@@ -3,7 +3,7 @@
 	<ul class="nav nav-tabs nav-stacked">
 <?php
 $req = "SELECT project_name, project_id FROM `users` INNER JOIN rights ON right_user = user_id INNER JOIN projects ON right_project = project_id WHERE user_login = '" . $_SESSION ['username'] . "' ORDER BY project_name ASC;";
-$res = mysqli_query ( $req );
+$res = $mysqli->query ( $req );
 $options = "";
 while ( $line = mysqli_fetch_array ( $res ) ) {
 	echo "<li><a href='./form.php?p_id=" . $line ['project_id'] . "'>" . $line ['project_name'] . "</a></li>";
