@@ -10,7 +10,7 @@ google_ad_height = 90;
 //-->
 </script>
 	<script type="text/javascript"
-		src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+		src="//pagead2.googlesyndication.com/pagead/show_ads.js"></script>
 	<script type="text/javascript">
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
