@@ -7,7 +7,7 @@ if (isset ( $_GET ['t_id'] ) && $_GET ['t_id'] > 0) {
 	$req = "SELECT * FROM tasks INNER JOIN rights rg ON task_project = right_project INNER JOIN users ON right_user = user_id AND user_login = '" . $_SESSION ['username'] . "' WHERE  task_id = " . $t_id . ";";
 	$res = $mysqli->query ( $req );
 	if (mysqli_num_rows ( $res ) == 0) {
-		$mysqli->close ( $link );
+		$mysqli->close ();
 		header ( "HTTP/1.1 401 Unauthorized" );
 		exit ();
 	}
@@ -27,14 +27,14 @@ if (isset ( $_GET ['t_id'] ) && $_GET ['t_id'] > 0) {
 			'task_order' => $line ["task_order"] 
 	);
 	echo json_encode ( $result );
-	$mysqli->close ( $link );
+	$mysqli->close ();
 } else if (isset ( $_GET ['p_id'] ) && $_GET ['p_id'] > 0) {
 	$p_id = $_GET ['p_id'];
 	require ("lib/bdd.inc.php");
 	$req = "SELECT * FROM users INNER JOIN rights rg ON rg.right_user = user_id WHERE right_project = " . $_GET ['p_id'] . " AND user_login = '" . $_SESSION ['username'] . "';";
 	$res = $mysqli->query ( $req );
 	if (mysqli_num_rows ( $res ) == 0 && $p_id != 1) {
-		$mysqli->close ( $link );
+		$mysqli->close ();
 		header ( "HTTP/1.1 401 Unauthorized" );
 		exit ();
 	}
@@ -67,6 +67,6 @@ if (isset ( $_GET ['t_id'] ) && $_GET ['t_id'] > 0) {
 	}
 	$result ['socket_io'] = $socketIo;
 	echo json_encode ( $result );
-	$mysqli->close ( $link );
+	$mysqli->close ();
 }
 ?>
