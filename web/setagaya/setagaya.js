@@ -82,137 +82,139 @@ $(function() {
 					console.log('auto-refresh not enabled');
 				}
 			}
-			$.each(jsonData.tasks, function(i, item) {
-				$('#t_id').append($('<option>', { 
-					value: item.task_id,
-					text : item.task_name 
-				}));
-				if(item.task_lvl == "0"){
-					item.css_class="alert alert-success";
-				}else if(item.task_lvl == "1"){
-					item.css_class="alert alert-info";
-				}else if(item.task_lvl == "2"){
-					item.css_class="alert";
-				}else if(item.task_lvl == "3"){
-					item.css_class="alert alert-error";
-				}
-				var render = template.render(item);
-				var name
-				if(item.task_owner > 0){
-					jQuery('#today-'+item.task_owner+' .connectedSortable').append(render);
-				}else{
-					jQuery('#sortable-'+item.task_lvl).append(render);
-				}
-				$( "#li-"+item.task_id+" button.close" ).click(function() {
-					var url = "./save.php";
-					$.ajax({
-						url: url,
-						data: { action: "task-done", t_id: $(this).parent("li").attr('id'), p_id: p_id },
-						success: function(data) {
-
-
-
-
-                        	  $( "ul.connectedSortable" ).each(function( index ) {
-          				        var time=0;
-          				        $( "li", $(this)).each(function( index ) {
-          				        	time += parseInt($(this).data('time'));
-          				        	if($(this).data('order') != index && p_id != 1){
-          				                var url = "./save.php";
-          				                $.ajax({
-          				                    url: url,
-          				                    data: { action: "task-order", t_id: $(this).attr('id'), p_id: p_id, order: index },
-          				                    success: function(data) {
-          				                        $('#li-'+data.task.task_id).data('order', data.task.task_order);
-          				                    }
-          				                });
-          				        	}
-          				        });
-          				        $('.count', $(this).parent()).text(time);
-          				    });
-
-
-
-
-						}
+			if (typeof jsonData.tasks !== 'undefined') {
+				$.each(jsonData.tasks, function(i, item) {
+					$('#t_id').append($('<option>', { 
+						value: item.task_id,
+						text : item.task_name 
+					}));
+					if(item.task_lvl == "0"){
+						item.css_class="alert alert-success";
+					}else if(item.task_lvl == "1"){
+						item.css_class="alert alert-info";
+					}else if(item.task_lvl == "2"){
+						item.css_class="alert";
+					}else if(item.task_lvl == "3"){
+						item.css_class="alert alert-error";
+					}
+					var render = template.render(item);
+					var name
+					if(item.task_owner > 0){
+						jQuery('#today-'+item.task_owner+' .connectedSortable').append(render);
+					}else{
+						jQuery('#sortable-'+item.task_lvl).append(render);
+					}
+					$( "#li-"+item.task_id+" button.close" ).click(function() {
+						var url = "./save.php";
+						$.ajax({
+							url: url,
+							data: { action: "task-done", t_id: $(this).parent("li").attr('id'), p_id: p_id },
+							success: function(data) {
+	
+	
+	
+	
+	                        	  $( "ul.connectedSortable" ).each(function( index ) {
+	          				        var time=0;
+	          				        $( "li", $(this)).each(function( index ) {
+	          				        	time += parseInt($(this).data('time'));
+	          				        	if($(this).data('order') != index && p_id != 1){
+	          				                var url = "./save.php";
+	          				                $.ajax({
+	          				                    url: url,
+	          				                    data: { action: "task-order", t_id: $(this).attr('id'), p_id: p_id, order: index },
+	          				                    success: function(data) {
+	          				                        $('#li-'+data.task.task_id).data('order', data.task.task_order);
+	          				                    }
+	          				                });
+	          				        	}
+	          				        });
+	          				        $('.count', $(this).parent()).text(time);
+	          				    });
+	
+	
+	
+	
+							}
+						});
 					});
+					jQuery('#li-'+item.task_id).data('time', item.task_time);
+					jQuery('#li-'+item.task_id).data('order', item.task_order);
+					
+					
+					
+					
+					
+					$( ".connectedSortable" ).sortable({
+						connectWith: ".connectedSortable",
+						start: function(event, ui) {
+							item = ui.item;
+							newList = oldList = ui.item.parent().parent();
+						},
+						stop: function(event, ui) {
+				          var url = "./save.php";
+				          var id = getTaskId($(item));
+				          $(item).data('level', newList.attr('id'));
+				          updateTask(id);
+				    	  if(p_id != 1){
+				          $.ajax({
+				          	  url: url,
+				          	  data: { action: "planning-task", t_id: item.attr('id'), p_id: p_id, from: oldList.attr('id'), to: newList.attr('id') },
+				          	  success: function(data) {}
+				          	});
+				    	  }
+				          $( "ul.connectedSortable" ).each(function( index ) {
+				              var time=0;
+				              $( "li", $(this)).each(function( index ) {
+				              	time += parseInt($(this).data('time'));
+				              	if($(this).data('order') != index && p_id != 1){
+				                      var url = "./save.php";
+				                      $.ajax({
+				                          url: url,
+				                          data: { action: "task-order", t_id: $(this).attr('id'), p_id: p_id, order: index },
+				                          success: function(data) {
+				                              $('#li-'+data.task.task_id).data('order', data.task.task_order);
+				                          }
+				                      });
+				              	}
+				              });
+				              $('.count', $(this).parent()).text(time);
+				          });
+				      },
+				      change: function(event, ui) {
+				          if(ui.sender) newList = ui.placeholder.parent().parent();
+				      }
+				      }).disableSelection();
+					
+					
+					
+	
+				    $( "ul.connectedSortable" ).each(function( index ) {
+				        var time=0;
+				        $( "li", $(this)).each(function( index ) {
+				        	time += parseInt($(this).data('time'));
+				        	if($(this).data('order') != index && p_id != 1){
+				                var url = "./save.php";
+				                $.ajax({
+				                    url: url,
+				                    data: { action: "task-order", t_id: $(this).attr('id'), p_id: p_id, order: index },
+				                    success: function(data) {
+				                        $('#li-'+data.task.task_id).data('order', data.task.task_order);
+				                    }
+				                });
+				        	}
+				        });
+				        $('.count', $(this).parent()).text(time);
+				    });
+					
+					
+	
+			    	  
+				    
+				    
+					
 				});
-				jQuery('#li-'+item.task_id).data('time', item.task_time);
-				jQuery('#li-'+item.task_id).data('order', item.task_order);
-				
-				
-				
-				
-				
-				$( ".connectedSortable" ).sortable({
-					connectWith: ".connectedSortable",
-					start: function(event, ui) {
-						item = ui.item;
-						newList = oldList = ui.item.parent().parent();
-					},
-					stop: function(event, ui) {
-			          var url = "./save.php";
-			          var id = getTaskId($(item));
-			          $(item).data('level', newList.attr('id'));
-			          updateTask(id);
-			    	  if(p_id != 1){
-			          $.ajax({
-			          	  url: url,
-			          	  data: { action: "planning-task", t_id: item.attr('id'), p_id: p_id, from: oldList.attr('id'), to: newList.attr('id') },
-			          	  success: function(data) {}
-			          	});
-			    	  }
-			          $( "ul.connectedSortable" ).each(function( index ) {
-			              var time=0;
-			              $( "li", $(this)).each(function( index ) {
-			              	time += parseInt($(this).data('time'));
-			              	if($(this).data('order') != index && p_id != 1){
-			                      var url = "./save.php";
-			                      $.ajax({
-			                          url: url,
-			                          data: { action: "task-order", t_id: $(this).attr('id'), p_id: p_id, order: index },
-			                          success: function(data) {
-			                              $('#li-'+data.task.task_id).data('order', data.task.task_order);
-			                          }
-			                      });
-			              	}
-			              });
-			              $('.count', $(this).parent()).text(time);
-			          });
-			      },
-			      change: function(event, ui) {
-			          if(ui.sender) newList = ui.placeholder.parent().parent();
-			      }
-			      }).disableSelection();
-				
-				
-				
-
-			    $( "ul.connectedSortable" ).each(function( index ) {
-			        var time=0;
-			        $( "li", $(this)).each(function( index ) {
-			        	time += parseInt($(this).data('time'));
-			        	if($(this).data('order') != index && p_id != 1){
-			                var url = "./save.php";
-			                $.ajax({
-			                    url: url,
-			                    data: { action: "task-order", t_id: $(this).attr('id'), p_id: p_id, order: index },
-			                    success: function(data) {
-			                        $('#li-'+data.task.task_id).data('order', data.task.task_order);
-			                    }
-			                });
-			        	}
-			        });
-			        $('.count', $(this).parent()).text(time);
-			    });
-				
-				
-
-		    	  
-			    
-			    
-				
-			});
+			}
 		},
 		error: function() {
 			alert('Error loading ');
