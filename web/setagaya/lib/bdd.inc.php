@@ -22,8 +22,7 @@ if (mysqli_connect_error ()) {
 	die ( 'Connect Error (' . mysqli_connect_errno () . ') ' . mysqli_connect_error () );
 }
 
-$res = $mysqli->query ( "SHOW TABLES LIKE users" );
-if (mysqli_num_rows ( $res ) == 0) {
+if ($res = $mysqli->query ( "SHOW TABLES LIKE users;" ) && $res->num_rows == 0) {
 	$sqlSource = file_get_contents ( 'demo.sql' );
 	$mysqli->multi_query ( $sqlSource );
 }

@@ -85,7 +85,7 @@ if (! isset ( $_SESSION ['username'] )) {
 	$req = "SELECT ri.* FROM users INNER JOIN rights ri ON user_id = right_user WHERE right_project = " . $p_id . " AND user_login = '" . $_SESSION ['username'] . "';";
 	$res = $mysqli->query ( $req );
 	if (mysqli_num_rows ( $res ) > 0) {
-		$user = mysqli_fetch_array ( $res );
+		$user = mysqli_fetch_array ( $res, MYSQLI_ASSOC );
 	}
 	?>
 <?php require('php/matrix.php');?>
