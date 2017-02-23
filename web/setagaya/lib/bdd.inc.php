@@ -25,7 +25,7 @@ if (mysqli_connect_error ()) {
 $res = $mysqli->query ( "SHOW TABLES LIKE users" );
 if (mysqli_num_rows ( $res ) == 0) {
 	$sqlSource = file_get_contents ( 'demo.sql' );
-	$mysqli->multi_query ( $sql, $sqlSource );
+	$mysqli->multi_query ( $sqlSource );
 }
 
 $socketIo = false;
