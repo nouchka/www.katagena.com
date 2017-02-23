@@ -37,7 +37,7 @@ if (isset ( $_SESSION ['username'] )) {
 			$req = "SELECT user_id FROM users WHERE user_login = '" . $_SESSION ['username'] . "';";
 			$res = $mysqli->query ( $req );
 			if (mysqli_num_rows ( $res ) > 0) {
-				$line = $mysqli->fetch_array ( $res );
+				$line = mysqli_fetch_array ( $res );
 				$id = $line ['user_id'];
 			} else {
 				$req = "INSERT INTO users (`user_id` , `user_login`) VALUES (NULL, '" . mysqli_escape_string ( $_SESSION ['username'] ) . "');";
@@ -224,7 +224,7 @@ if (isset ( $_SESSION ['username'] )) {
 				$req = "SELECT user_id FROM users WHERE user_login = '" . mysqli_escape_string ( $_POST ['u_name'] ) . "';";
 				$res = $mysqli->query ( $req );
 				if (mysqli_num_rows ( $res ) > 0) {
-					$line = $mysqli->fetch_array ( $res );
+					$line = mysqli_fetch_array ( $res );
 					$id = $line ['user_id'];
 				} else {
 					$req = "INSERT INTO users (`user_id` , `user_login`) VALUES (NULL, '" . mysqli_escape_string ( $_POST ['u_name'] ) . "');";

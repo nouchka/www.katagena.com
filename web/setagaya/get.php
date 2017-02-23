@@ -14,7 +14,7 @@ if (isset ( $_GET ['t_id'] ) && $_GET ['t_id'] > 0) {
 	header ( 'Content-type: application/json' );
 	$req = "SELECT * FROM tasks WHERE task_id = " . $t_id . ";";
 	$res = $mysqli->query ( $req );
-	$line = $mysqli->fetch_array ( $res );
+	$line = mysqli_fetch_array ( $res );
 	$result = array ();
 	$result ['task'] = array (
 			'task_id' => $line ["task_id"],
@@ -43,7 +43,7 @@ if (isset ( $_GET ['t_id'] ) && $_GET ['t_id'] > 0) {
 	$result ['users'] = array ();
 	$req = "SELECT * FROM `users` INNER JOIN rights ON right_user = user_id AND right_project = " . $p_id . " LEFT JOIN projects ON project_id = " . $p_id . " AND project_owner = user_id ORDER BY user_login ASC;";
 	$res = $mysqli->query ( $req );
-	while ( $line = $mysqli->fetch_array ( $res ) ) {
+	while ( $line = mysqli_fetch_array ( $res ) ) {
 		$result ['users'] [] = array (
 				'id' => $line ['user_id'],
 				'name' => $line ['user_login'],
@@ -53,7 +53,7 @@ if (isset ( $_GET ['t_id'] ) && $_GET ['t_id'] > 0) {
 	}
 	$req = "SELECT * FROM  `tasks` LEFT JOIN `users` ON user_id = task_owner WHERE task_done = 0 AND task_project = " . $p_id . " ORDER BY task_order ASC;";
 	$res = $mysqli->query ( $req );
-	while ( $line = $mysqli->fetch_array ( $res ) ) {
+	while ( $line = mysqli_fetch_array ( $res ) ) {
 		$result ['tasks'] [] = array (
 				'task_id' => $line ["task_id"],
 				'task_name' => utf8_encode ( $line ["task_name"] ),
