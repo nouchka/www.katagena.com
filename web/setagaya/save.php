@@ -23,12 +23,12 @@ if (isset ( $_SESSION ['username'] )) {
 				// Update project
 				$req = "UPDATE projects SET project_name = '" . mysqli_escape_string ( $_POST ['inputName'] ) . "' WHERE project_id = '" . mysqli_escape_string ( $_POST ['inputId'] ) . "';";
 				$res = $mysqli->query ( $req );
-				mysqli_close ( $link );
+				$mysqli->close ( $link );
 				header ( 'Location:./form.php' );
 			} else {
 				// No rights to modifiy name
 				// TODO message
-				mysqli_close ( $link );
+				$mysqli->close ( $link );
 				header ( "HTTP/1.1 401 Unauthorized" );
 				exit ();
 			}
@@ -37,7 +37,7 @@ if (isset ( $_SESSION ['username'] )) {
 			$req = "SELECT user_id FROM users WHERE user_login = '" . $_SESSION ['username'] . "';";
 			$res = $mysqli->query ( $req );
 			if (mysqli_num_rows ( $res ) > 0) {
-				$line = mysqli_fetch_array ( $res );
+				$line = $mysqli->fetch_array ( $res );
 				$id = $line ['user_id'];
 			} else {
 				$req = "INSERT INTO users (`user_id` , `user_login`) VALUES (NULL, '" . mysqli_escape_string ( $_SESSION ['username'] ) . "');";
@@ -49,7 +49,7 @@ if (isset ( $_SESSION ['username'] )) {
 			$idProject = mysqli_insert_id ();
 			$req = "INSERT INTO rights (`right_id` ,`right_user` ,`right_project` ,`right_modify` ,`right_act` ,`right_manuser` ,`right_mantask`) VALUES (NULL ,  '" . $id . "', '" . $idProject . "', '1', '1', '1', '1');";
 			$res = $mysqli->query ( $req );
-			mysqli_close ( $link );
+			$mysqli->close ( $link );
 			header ( 'Location:./form.php' );
 		}
 	} else if ((isset ( $_POST ['p_id'] ) && $_POST ['p_id'] > 0) || (isset ( $_GET ['p_id'] ) && $_GET ['p_id'] != "")) {
@@ -80,7 +80,7 @@ if (isset ( $_SESSION ['username'] )) {
 					// Update task
 					$req = "UPDATE tasks SET task_name = '" . mysqli_escape_string ( $_POST ['inputTask'] ) . "',  task_category = '" . mysqli_escape_string ( $_POST ['inputCategory'] ) . "', task_time = '" . mysqli_escape_string ( $_POST ['inputHours'] ) . "' WHERE task_id = '" . mysqli_escape_string ( $_POST ['t_id'] ) . "';";
 					$res = $mysqli->query ( $req );
-					mysqli_close ( $link );
+					$mysqli->close ( $link );
 					if ($socketIo) {
 						try {
 							$elephant = new ElephantIOClient ( 'http://katagena.com/', 'socket.io', 1, false, true, true );
@@ -102,7 +102,7 @@ if (isset ( $_SESSION ['username'] )) {
 					$req = "INSERT INTO `tasks` (`task_id` ,`task_name` ,`task_category` ,`task_time` ,`task_deadline` ,`task_lvl` ,`task_project` ,`task_owner` ,`task_order`) VALUES (NULL , '" . mysqli_escape_string ( $_POST ['inputTask'] ) . "', '" . mysqli_escape_string ( $_POST ['inputCategory'] ) . "', '" . mysqli_escape_string ( $_POST ['inputHours'] ) . "', NULL , '0', '" . $p_id . "', NULL, '');";
 					$res = $mysqli->query ( $req );
 					$id = mysqli_insert_id ();
-					mysqli_close ( $link );
+					$mysqli->close ( $link );
 					if ($socketIo) {
 						try {
 							$elephant = new ElephantIOClient ( 'http://katagena.com/', 'socket.io', 1, false, true, true );
@@ -126,7 +126,7 @@ if (isset ( $_SESSION ['username'] )) {
 				// Update task
 				$req = "UPDATE tasks SET task_order = '" . mysqli_escape_string ( $_GET ['order'] ) . "' WHERE task_id = '" . mysqli_escape_string ( $id ) . "';";
 				$res = $mysqli->query ( $req );
-				mysqli_close ( $link );
+				$mysqli->close ( $link );
 				if ($socketIo) {
 					try {
 						$elephant = new ElephantIOClient ( 'http://katagena.com/', 'socket.io', 1, false, true, true );
@@ -156,7 +156,7 @@ if (isset ( $_SESSION ['username'] )) {
 				// Update task
 				$req = "UPDATE tasks SET task_done = '1' WHERE task_id = '" . mysqli_escape_string ( $id ) . "';";
 				$res = $mysqli->query ( $req );
-				mysqli_close ( $link );
+				$mysqli->close ( $link );
 				if ($socketIo) {
 					try {
 						$elephant = new ElephantIOClient ( 'http://katagena.com/', 'socket.io', 1, false, true, true );
@@ -211,20 +211,20 @@ if (isset ( $_SESSION ['username'] )) {
 						var_dump ( $e );
 					}
 				}
-				mysqli_close ( $link );
+				$mysqli->close ( $link );
 				echo "task updated";
 			} else if (isset ( $_GET ['action'] ) && $_GET ['action'] == "remove-user" && isset ( $_GET ['u_id'] ) && $_GET ['u_id'] != "") {
 				$req = "DELETE FROM rights WHERE right_project = " . $p_id . " AND right_user = " . mysqli_escape_string ( $_GET ['u_id'] ) . ";";
 				$res = $mysqli->query ( $req );
 				$req = "UPDATE tasks SET task_owner = NULL WHERE task_project = " . $p_id . " AND task_owner = " . mysqli_escape_string ( $_GET ['u_id'] ) . ";";
 				$res = $mysqli->query ( $req );
-				mysqli_close ( $link );
+				$mysqli->close ( $link );
 				header ( 'Location:./form.php?p_id=' . $p_id );
 			} else if (isset ( $_GET ['action'] ) && $_GET ['action'] == "add-user" && isset ( $_POST ['u_name'] ) && $_POST ['u_name'] != "") {
 				$req = "SELECT user_id FROM users WHERE user_login = '" . mysqli_escape_string ( $_POST ['u_name'] ) . "';";
 				$res = $mysqli->query ( $req );
 				if (mysqli_num_rows ( $res ) > 0) {
-					$line = mysqli_fetch_array ( $res );
+					$line = $mysqli->fetch_array ( $res );
 					$id = $line ['user_id'];
 				} else {
 					$req = "INSERT INTO users (`user_id` , `user_login`) VALUES (NULL, '" . mysqli_escape_string ( $_POST ['u_name'] ) . "');";
@@ -233,7 +233,7 @@ if (isset ( $_SESSION ['username'] )) {
 				}
 				$req = "INSERT INTO rights (`right_id` ,`right_user` ,`right_project` ,`right_modify` ,`right_act` ,`right_manuser` ,`right_mantask`) VALUES (NULL ,  '" . $id . "', '" . $p_id . "', '1', '1', '1', '1');";
 				$res = $mysqli->query ( $req );
-				mysqli_close ( $link );
+				$mysqli->close ( $link );
 				header ( 'Location:./form.php?p_id=' . $p_id );
 			} else {
 				echo "No correct parameters";
@@ -241,7 +241,7 @@ if (isset ( $_SESSION ['username'] )) {
 		} else {
 			// No rights to modifiy name
 			// TODO message
-			mysqli_close ( $link );
+			$mysqli->close ( $link );
 			header ( "HTTP/1.1 401 Unauthorized" );
 			exit ();
 		}
