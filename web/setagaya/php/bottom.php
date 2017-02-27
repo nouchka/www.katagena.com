@@ -1,6 +1,6 @@
 
 <hr />
-<div style="text-align: center;">
+<div style="text-align: center;" class="ads">
 	<script type="text/javascript"><!--
 google_ad_client = "ca-pub-4551463433841800";
 /* Setagaya */

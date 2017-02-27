@@ -55,6 +55,14 @@ body .alert .close {
 	content="v6qF3Z-u8ipZVdfEns_TszcTYisE5AUYlHmTEq9yd90" />
 </head>
 <body>
+	<?php
+	use AntonioTajuelo\Gtm\Gtm;
+	
+	Gtm::renderContainer ( 'GTM-T9CJCZK' );
+	Gtm::datalayerPush ( [ 
+			'website' => 'setagaya' 
+	] );
+	?>
 	<div class="container">
 		<div class="masthead">
 			<h3 class="muted"></h3>

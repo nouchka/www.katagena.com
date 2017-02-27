@@ -9,16 +9,25 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 body {
-    background-color: #86b15c;
+	background-color: #86b15c;
 }
 
 a {
-    text-decoration: none;
-    color: black;
-} 
+	text-decoration: none;
+	color: black;
+}
 </style>
 </head>
 <body>
+<?php
+require '../vendor/autoload.php';
+use AntonioTajuelo\Gtm\Gtm;
+
+Gtm::renderContainer ( 'GTM-T9CJCZK' );
+Gtm::datalayerPush ( [ 
+		'website' => 'home' 
+] );
+?>
 	<!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
@@ -29,13 +38,13 @@ a {
 			frameborder="0" allowfullscreen></iframe>
 	</p>
 	<p align="center">
-		<a href="https://japromis.katagena.com">resume</a>
-		<a href="https://nouchka.katagena.com">blog</a>
-		<a href="https://static.katagena.com/kobe/">kobe</a>
-		<a href="https://static.katagena.com/lol/">league</a>
-		<a href="https://static.katagena.com/ireland/2005/07/21/stage-en-irlande-dans-la-butler-gallery/index.html">ireland</a>
+		<a href="https://japromis.katagena.com">resume</a> <a
+			href="https://nouchka.katagena.com">blog</a> <a
+			href="https://static.katagena.com/kobe/">kobe</a> <a
+			href="https://static.katagena.com/lol/">league</a> <a
+			href="https://static.katagena.com/ireland/2005/07/21/stage-en-irlande-dans-la-butler-gallery/index.html">ireland</a>
 	</p>
-	
+
 
 </body>
 </html>

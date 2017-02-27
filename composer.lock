@@ -4,8 +4,52 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "dd79c24547b0f3b6cb450cdf8255f12f",
+    "content-hash": "9b0f45f14b605733013cb9443e66211c",
     "packages": [
+        {
+            "name": "antoniotajuelo/google-tag-manager-php",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/antoniotajuelo/google-tag-manager-php.git",
+                "reference": "e32bd3354ac29a35ab0f41ec22b803dd88233711"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/antoniotajuelo/google-tag-manager-php/zipball/e32bd3354ac29a35ab0f41ec22b803dd88233711",
+                "reference": "e32bd3354ac29a35ab0f41ec22b803dd88233711",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "AntonioTajuelo\\Gtm\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Antonio Tajuelo",
+                    "email": "atajuelo@gmail.com",
+                    "homepage": "https://www.antoniotajuelo.com/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Simple PHP helper functions for implementing Google Tag Manager within your website.",
+            "homepage": "https://github.com/antoniotajuelo/google-tag-manager-php",
+            "keywords": [
+                "Google Tag Manager",
+                "google analytics",
+                "gtm"
+            ],
+            "time": "2016-07-24 17:59:42"
+        },
         {
             "name": "rmccue/requests",
             "version": "v1.7.0",
@@ -153,7 +197,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "antoniotajuelo/google-tag-manager-php": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

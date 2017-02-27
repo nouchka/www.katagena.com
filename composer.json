@@ -2,7 +2,8 @@
   "require": {
     "ext-mysql": "*",
     "suin/php-rss-writer": "^1.5",
-    "rmccue/requests": "^1.7"
+    "rmccue/requests": "^1.7",
+    "antoniotajuelo/google-tag-manager-php": "dev-master#e32bd3354ac29a35ab0f41ec22b803dd88233711"
   },
   "require-dev": {
     "heroku/heroku-buildpack-php": "*"
