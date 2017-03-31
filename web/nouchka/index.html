@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+<head>
+<title>Nouchka.screenshots</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>
+* {
+	padding: 0;
+	margin: 0;
+}
+
+html, body {
+	
+}
+
+.page-wrapper {
+	
+}
+
+.content {
+	background-image: url("wow.jpg");
+	background-size: cover;
+}
+</style>
+<body>
+	<div class="page-wrapper">
+		<div class="content"></div>
+		<footer>Les Anges D&eacute;chus @ Khaz Modan</footer>
+	</div>
+	<script type="text/javascript" src="//code.jquery.com/jquery-1.9.1.js"></script>
+	<script>
+		function setDimensions() {
+			var windowsHeight = $(window).height();
+			$('.content').css('height', windowsHeight + 'px');
+		}
+
+		setDimensions();
+
+		//when resizing the site, we adjust the heights of the sections
+		$(window).resize(function() {
+			setDimensions();
+		});
+	</script>
+
+
+</head></body>
+
+</html>
