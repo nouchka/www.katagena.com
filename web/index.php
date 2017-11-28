@@ -1,3 +1,6 @@
+<?php
+header ( 'Location: https://nouchka.katagena.com/' );
+?>
 <!doctype html>
 <html class="no-js" lang="">
 <head>
