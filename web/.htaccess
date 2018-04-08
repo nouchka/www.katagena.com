@@ -1,3 +1,1 @@
-<Directory /app/web>
-    FileETag Size
-</Directory>
+FileETag Size
