@@ -1,55 +1,11 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9b0f45f14b605733013cb9443e66211c",
+    "content-hash": "15c09dc76b6c048d80a3118ac7288698",
     "packages": [
-        {
-            "name": "antoniotajuelo/google-tag-manager-php",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/antoniotajuelo/google-tag-manager-php.git",
-                "reference": "e32bd3354ac29a35ab0f41ec22b803dd88233711"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/antoniotajuelo/google-tag-manager-php/zipball/e32bd3354ac29a35ab0f41ec22b803dd88233711",
-                "reference": "e32bd3354ac29a35ab0f41ec22b803dd88233711",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "AntonioTajuelo\\Gtm\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Antonio Tajuelo",
-                    "email": "atajuelo@gmail.com",
-                    "homepage": "https://www.antoniotajuelo.com/",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Simple PHP helper functions for implementing Google Tag Manager within your website.",
-            "homepage": "https://github.com/antoniotajuelo/google-tag-manager-php",
-            "keywords": [
-                "Google Tag Manager",
-                "google analytics",
-                "gtm"
-            ],
-            "time": "2016-07-24 17:59:42"
-        },
         {
             "name": "rmccue/requests",
             "version": "v1.7.0",
@@ -100,17 +56,67 @@
             "time": "2016-10-13T00:11:37+00:00"
         },
         {
-            "name": "suin/php-rss-writer",
-            "version": "1.5.0",
+            "name": "rollerworks/version",
+            "version": "v0.3.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/suin/php-rss-writer.git",
-                "reference": "938b067ba0f3a4d494edbdb1241d054e7d15b633"
+                "url": "https://github.com/rollerworks/version.git",
+                "reference": "a1b8fbd1476ac78a7e0193d84009509ea34f64c6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/suin/php-rss-writer/zipball/938b067ba0f3a4d494edbdb1241d054e7d15b633",
-                "reference": "938b067ba0f3a4d494edbdb1241d054e7d15b633",
+                "url": "https://api.github.com/repos/rollerworks/version/zipball/a1b8fbd1476ac78a7e0193d84009509ea34f64c6",
+                "reference": "a1b8fbd1476ac78a7e0193d84009509ea34f64c6",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1"
+            },
+            "require-dev": {
+                "phpstan/phpstan": "^0.10.3",
+                "phpstan/phpstan-phpunit": "^0.10",
+                "phpunit/phpunit": "^7.3.2",
+                "symfony/phpunit-bridge": "^4.1"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.2-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Rollerworks\\Component\\Version\\": "src/"
+                },
+                "exclude-from-classmap": [
+                    "tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sebastiaan Stok",
+                    "email": "s.stok@rollerscapes.net"
+                }
+            ],
+            "description": "Semantic versioning helper library",
+            "time": "2018-11-14T15:35:06+00:00"
+        },
+        {
+            "name": "suin/php-rss-writer",
+            "version": "1.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/suin/php-rss-writer.git",
+                "reference": "78f45e44a2a7cb0d82e4b9efb6f7b7a075b9051c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/suin/php-rss-writer/zipball/78f45e44a2a7cb0d82e4b9efb6f7b7a075b9051c",
+                "reference": "78f45e44a2a7cb0d82e4b9efb6f7b7a075b9051c",
                 "shasum": ""
             },
             "require": {
@@ -133,7 +139,7 @@
             ],
             "authors": [
                 {
-                    "name": "Hidehito Nozawa aka Suin",
+                    "name": "suin",
                     "email": "suinyeze@gmail.com"
                 }
             ],
@@ -146,22 +152,22 @@
                 "rss",
                 "writer"
             ],
-            "time": "2016-07-21T14:05:32+00:00"
+            "time": "2017-07-13T10:47:50+00:00"
         }
     ],
     "packages-dev": [
         {
             "name": "heroku/heroku-buildpack-php",
-            "version": "v121",
+            "version": "v155",
             "source": {
                 "type": "git",
                 "url": "https://github.com/heroku/heroku-buildpack-php.git",
-                "reference": "727aa850a02a7af94c9225237464be8e8c8ff6db"
+                "reference": "2b160ad695cbef0d0adbd459ec161584f05e30ce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/heroku/heroku-buildpack-php/zipball/727aa850a02a7af94c9225237464be8e8c8ff6db",
-                "reference": "727aa850a02a7af94c9225237464be8e8c8ff6db",
+                "url": "https://api.github.com/repos/heroku/heroku-buildpack-php/zipball/2b160ad695cbef0d0adbd459ec161584f05e30ce",
+                "reference": "2b160ad695cbef0d0adbd459ec161584f05e30ce",
                 "shasum": ""
             },
             "bin": [
@@ -192,18 +198,14 @@
                 "nginx",
                 "php"
             ],
-            "time": "2017-03-27T23:33:27+00:00"
+            "time": "2019-05-09T21:07:40+00:00"
         }
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "antoniotajuelo/google-tag-manager-php": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": {
-        "ext-mysql": "*"
-    },
+    "platform": [],
     "platform-dev": []
 }

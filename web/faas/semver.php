@@ -12,14 +12,14 @@ $etag = md5($version);
 header("Etag: $etag");
 header('Cache-Control: public, max-age=864000');
 
-if (trim($_SERVER['HTTP_IF_NONE_MATCH']) == $etag) {
+if (isset($_SERVER['HTTP_IF_NONE_MATCH']) && trim($_SERVER['HTTP_IF_NONE_MATCH']) == $etag) {
     header("HTTP/1.1 304 Not Modified");
     exit;
 }
 
 $version = Version::fromString($version);
 
-$newVersion = $version->increase('major');
+$newVersion = $version->getNextIncreaseOf('major');
 
 echo $newVersion;
 
