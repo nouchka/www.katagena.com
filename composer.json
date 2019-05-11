@@ -1,5 +1,6 @@
 {
   "require": {
+    "ext-SimpleXML": "*",
     "rollerworks/version": "*",
     "suin/php-rss-writer": "^1.5",
     "rmccue/requests": "^1.7"
