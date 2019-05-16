@@ -3,6 +3,7 @@
     "ext-SimpleXML": "*",
     "rollerworks/version": "*",
     "suin/php-rss-writer": "^1.5",
+    "sentry/sdk": "2.0.2",
     "rmccue/requests": "^1.7"
   },
   "require-dev": {
