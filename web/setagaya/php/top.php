@@ -1,4 +1,7 @@
-<?php require("lib/bdd.inc.php");?>
+<?php
+
+require ("lib/bdd.inc.php");
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
 	prefix="og: http://ogp.me/ns#">
@@ -55,14 +58,6 @@ body .alert .close {
 	content="v6qF3Z-u8ipZVdfEns_TszcTYisE5AUYlHmTEq9yd90" />
 </head>
 <body>
-	<?php
-	use AntonioTajuelo\Gtm\Gtm;
-	
-	Gtm::renderContainer ( 'GTM-T9CJCZK' );
-	Gtm::datalayerPush ( [ 
-			'website' => 'setagaya' 
-	] );
-	?>
 	<div class="container">
 		<div class="masthead">
 			<h3 class="muted"></h3>
@@ -71,13 +66,28 @@ body .alert .close {
 					<div class="container">
 						<ul class="nav">
 							<li
-								<?php if(strtolower($_SERVER["SCRIPT_NAME"]) == "/setagaya/index.php"){echo ' class="active"';}?>><a
+								<?php
+
+if (strtolower($_SERVER["SCRIPT_NAME"]) == "/setagaya/index.php") {
+            echo ' class="active"';
+        }
+        ?>><a
 								href="./">Home</a></li>
 							<li
-								<?php if(strtolower($_SERVER["SCRIPT_NAME"]) == "/setagaya/demo.php"){echo ' class="active"';}?>><a
+								<?php
+
+if (strtolower($_SERVER["SCRIPT_NAME"]) == "/setagaya/demo.php") {
+            echo ' class="active"';
+        }
+        ?>><a
 								href="./demo.php">Demo</a></li>
 							<li
-								<?php if(strtolower($_SERVER["SCRIPT_NAME"]) == "/setagaya/form.php"){echo ' class="active"';}?>><a
+								<?php
+
+if (strtolower($_SERVER["SCRIPT_NAME"]) == "/setagaya/form.php") {
+            echo ' class="active"';
+        }
+        ?>><a
 								href="./form.php">My plannings</a></li>
 						</ul>
 					</div>
