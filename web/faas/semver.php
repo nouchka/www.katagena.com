@@ -13,7 +13,7 @@ if (isset($sentryUrl)) {
 }
 
 $up = $_GET['up'];
-if (! in_array($up, [
+if (! isset($up) || ! in_array($up, [
     'major',
     'minor',
     'patch',
