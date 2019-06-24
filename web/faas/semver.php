@@ -11,7 +11,7 @@ if (isset($sentryUrl)) {
         'dsn' => $sentryUrl
     ]);
 }
-if (! isset($up)) {
+if (! isset($_GET['up'])) {
     echo 'missing up parameter';
     exit();
 }
