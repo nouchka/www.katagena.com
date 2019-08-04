@@ -1,5 +1,4 @@
 <?php
-
 require ("lib/bdd.inc.php");
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -68,7 +67,7 @@ body .alert .close {
 							<li
 								<?php
 
-if (strtolower($_SERVER["SCRIPT_NAME"]) == "/setagaya/index.php") {
+        if (strtolower($_SERVER["SCRIPT_NAME"]) == "/setagaya/index.php") {
             echo ' class="active"';
         }
         ?>><a
@@ -76,15 +75,15 @@ if (strtolower($_SERVER["SCRIPT_NAME"]) == "/setagaya/index.php") {
 							<li
 								<?php
 
-if (strtolower($_SERVER["SCRIPT_NAME"]) == "/setagaya/demo.php") {
+        if (strtolower($_SERVER["SCRIPT_NAME"]) == "/setagaya/demo.php") {
             echo ' class="active"';
         }
         ?>><a
 								href="./demo.php">Demo</a></li>
-							<li
+							<li style="display:none;"
 								<?php
 
-if (strtolower($_SERVER["SCRIPT_NAME"]) == "/setagaya/form.php") {
+        if (strtolower($_SERVER["SCRIPT_NAME"]) == "/setagaya/form.php") {
             echo ' class="active"';
         }
         ?>><a
