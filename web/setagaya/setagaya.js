@@ -47,7 +47,7 @@ $(function() {
 	}
 	$.ajax({
 		type: 'GET',
-		url: './get.php?p_id='+p_id,
+		url: './data?p_id='+p_id,
 		dataType: 'json',
 		success: function(jsonData) {
 			jQuery('#add-user-pid').val(p_id);
