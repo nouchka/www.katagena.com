@@ -1,6 +1,3 @@
 User-agent: *
 Allow: /
 Disallow: /dharma/
-Disallow: /nouchka/picture/
-Disallow: /nouchka/char/
-Disallow: /nouchka/tag/
