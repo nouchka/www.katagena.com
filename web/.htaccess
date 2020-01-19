@@ -1,1 +1,4 @@
 FileETag Size
+
+RewriteCond %{THE_REQUEST} ^GET\ /nouchka/
+RewriteRule ^nouchka/(.*) https://wow.katagena.com/$1 [L,R=301]
