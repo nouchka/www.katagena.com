@@ -1,3 +1,7 @@
 [build]
-  command = "make static"
-  publish = "static"
+  command = "make publish"
+  publish = "public"
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
