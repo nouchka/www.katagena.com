@@ -1,16 +1,3 @@
 include:
   - project: 'katagena/templates'
     file: 'ci/global.yml'
-
-build:
-  stage: build
-  image: ubuntu:latest
-  script:
-    - apt-get update
-    - apt-get install -y make wget
-    - make publish
-  artifacts:
-    paths:
-    - public
-  rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
